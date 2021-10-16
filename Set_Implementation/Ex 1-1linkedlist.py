@@ -1,7 +1,3 @@
-# Exercise 1
-# Implement set as linkedlist
-
-
 from Set_Implementation.set_class import LinkedlistSet
 import re
 import time
@@ -14,28 +10,27 @@ searchtime = []
 
 S = LinkedlistSet()
 file = open('pride-and-prejudice.txt', 'r')
-line = file.readline()
-while line:
-    array = re.findall('[a-zA-Z0-9]+', line)  # regular expression matching
+lines = file.readlines()
+for line in lines:
+    array = re.findall('[a-zA-Z0-9]+', line)
     length = len(array)
     for i in range(length):
         start = time.time_ns()
-        S.add(array[i])  # add word to set
+        S.add(array[i])
         t1 = time.time_ns()
         addtime.append(t1 - start)
         sizeovertime.append(S.size())
 
-    line = file.readline()
-
 file.close()
+print(S.size())
 
 file1 = open('words-shuffled.txt', 'r')
-line = file1.readline()
+lines = file1.readlines()
 
 Count = 0
 
 notfoundset = LinkedlistSet()
-while line:
+for line in lines:
     array = re.findall('[a-zA-Z0-9]+\'?[a-z]*', line)
     length = len(array)
     for i in range(length):
@@ -46,7 +41,7 @@ while line:
         if (foundOutput == False):
             Count += 1
             notfoundset.add(line)
-    line = file1.readline()
+    # line = file1.readline()
 print(Count)
 file1.close()
 

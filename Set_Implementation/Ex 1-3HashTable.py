@@ -15,8 +15,8 @@ searchtime = []
 
 S = HashTableSet()
 file = open('pride-and-prejudice.txt', 'r')
-line = file.readline()
-while line:
+lines = file.readlines()
+for line in lines:
     array = re.findall('[a-zA-Z0-9]+', line)  # regular expression matching
     length = len(array)
     for i in range(length):
@@ -26,16 +26,16 @@ while line:
         addtime.append(t1 - start)
         sizeovertime.append(S.size())
 
-    line = file.readline()
 file.close()
+print(S.size())
 
 file1 = open('words-shuffled.txt', 'r')
-line = file1.readline()
+lines = file1.readline()
 
 Count = 0
 
 notfoundset = HashTableSet()
-while line:
+for line in lines:
     array = re.findall('[a-zA-Z0-9]+\'?[a-z]*', line)
     length = len(array)
     for i in range(length):
@@ -46,7 +46,6 @@ while line:
         if (foundOutput == False):
             Count += 1
             notfoundset.add(line)
-    line = file1.readline()
 print(Count)
 
 notfoundset.printSet()

@@ -27,7 +27,7 @@ def convert(adl, nedge):
 
     myedge.print()
     vertice = len(adl)
-    Incmat = [[0] * n for i in range(vertice)]
+    Incmat = [[0] * n for _ in range(vertice)]
     for edgename, point in enumerate(myedge.matrix):
         v = int(point[0])
         c = int(point[1])
@@ -36,7 +36,8 @@ def convert(adl, nedge):
     return Incmat
 
 
-adList = {0: [1, 2], 2: {0, 1, 3}, 1: [2, 3, 4, 0], 4: [1, 3], 3: [1, 2, 4]}
+# adList = {0: [1, 2], 2: {0, 1, 3}, 1: [2, 3, 4, 0], 4: [1, 3], 3: [1, 2, 4]}
+adList = {0: [1, 4], 1: [0, 2, 3, 4], 2: [1, 3], 3: [1, 2, 4], 4: [0, 1, 3]}
 nedge = 0
 for i in adList:
     for j in adList[i]:

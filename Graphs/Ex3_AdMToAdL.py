@@ -12,4 +12,9 @@ def convert(matrix):
 
 
 AdM = [[1, 0, 0],[0, 1, 0],[0, 1, 1]]
-print(convert(AdM))
+adm = [[0,1,0,0,1],
+        [1,0,1,1,1],
+        [0,1,0,1,0],
+        [0,1,1,0,1],
+        [1,1,0,1,0]]
+print(convert(adm))

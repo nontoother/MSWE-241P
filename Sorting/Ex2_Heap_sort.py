@@ -22,26 +22,20 @@ def heapSort(nums):
     length = len(nums)
     for i in range(length//2, -1, -1):
         heapify(nums, i)
-    for i in range(length-1, -1, -1):
-        nums[i], nums[0] = nums[0], nums[i]
-        length -= 1
-        heapify(nums, 0)
 
     return nums
-
 
 
 sort_time = [0] * 10
 for repeat in range(10):
     L = []
     file = open('pride-and-prejudice.txt', 'r')
-    line = file.readline()
-    while line:
+    lines = file.readlines()
+    for line in lines:
         array = re.findall("[0-9a-zA-Z]+", line)
         length = len(array)
         for i in range(length):
             L.append(array[i])
-        line = file.readline()
 
     print(len(L))
     t1 = time.time_ns()

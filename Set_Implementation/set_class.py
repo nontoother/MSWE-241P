@@ -1,6 +1,5 @@
 # Class for linkedlist
 class LinkedlistNode():
-    # Function to initialise the node
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -11,13 +10,10 @@ class LinkedlistSet():
         self.head = None
         self.sizeOfSet = 0
 
-    # adds value to linkedlist if value not already in linkedlist
-    # returns 1 if value added, or returns 0 if value already present
     def add(self, value):
         curr = self.head
 
-        # base case if self.head == 0
-        if curr == None:
+        if curr == None:  # the first Node
             newNode = LinkedlistNode(value)
             self.head = newNode
             self.sizeOfSet = self.sizeOfSet + 1
@@ -26,45 +22,39 @@ class LinkedlistSet():
         reachedEndOfList = False
         while (curr.value != value):
             temp = curr.next
-            if temp == None:  # reached end of linkedlist
+            if temp == None:
                 reachedEndOfList = True
                 break
             else:
-                curr = temp  # go forward
+                curr = temp
 
-        if reachedEndOfList:  # value not found. insert value here
+        if reachedEndOfList:  # add new node
             newNode = LinkedlistNode(value)
             curr.next = newNode
             self.sizeOfSet = self.sizeOfSet + 1
             return True
-        else:  # found existing element with value in linkedlist
+        else:
             return False
 
     def contains(self, value):
         curr = self.head
 
-        # base case if self.head == 0
         if curr == None:
             return False
 
         reachedEndOfList = False
         while (curr.value != value):
             temp = curr.next
-            if temp == None:  # reached end of linkedlist
+            if temp == None:  # the end not found
                 reachedEndOfList = True
                 break
             else:
-                curr = temp  # go forward
+                curr = temp
 
         if reachedEndOfList:  # value not found. insert value here
             return False
-        else:  # found existing element with value in linkedlist
+        else:  # found the existed value
             return True
-
-    # funion of sets
-    def find_union(lst1, lst2):
-        result_lst = list(set(lst1) | set(lst2))
-        return result_lst
 
     def printSet(self):
         curhead = self.head
@@ -105,10 +95,10 @@ class Tree:
         self.sizeOfTree = 0
 
     def add(self, cNode, value):
-        if cNode is None:
+        if cNode is None:  # already find the right place to insert new node
             self.root = TreeNode(value)
             self.sizeOfTree += 1
-        elif (value < cNode.value):
+        elif (value < cNode.value):  # decide which path should go
             if cNode.leftchild:
                 self.add(cNode.leftchild, value)
             else:
@@ -127,9 +117,9 @@ class Tree:
             return False
 
     def contains(self, cNode, value):
-        if cNode is None:
+        if cNode is None:  # did not find the value in the right place
             return False
-        elif (value < cNode.value):
+        elif (value < cNode.value):  # recursion to find the right place
             if (cNode.leftchild):
                 return self.contains(cNode.leftchild, value)
             else:
@@ -174,13 +164,14 @@ class TreeSet:
 class HashTable(object):
 
     def __init__(self):
-        self.maxLength = 10000
+        self.maxLength = 10000  # avoid collision
         self.length = 0
         self.table = [None] * self.maxLength
 
     def length(self):
         return self.length
 
+    # hash function
     def hashing(self, key):
         keystr = str(key)  # make sure key is converted to string
         keylen = len(keystr)
@@ -196,17 +187,17 @@ class HashTable(object):
         initial_pos = hashval
         cur_pos = hashval
         while (True):
-            if self.table[cur_pos]:  # something exists at this location
+            if self.table[cur_pos]:  # get same value from hash function
                 if self.table[cur_pos] == key:  # duplicate
                     return False
                 else:
                     cur_pos += 1  # linear probing
             else:
-                self.table[cur_pos] = key  # add key when nothing found at cur_pos
+                self.table[cur_pos] = key  # add key when the place is empty
                 self.length += 1
                 return True
 
-            if cur_pos == initial_pos:  # if one cycle done, then break
+            if cur_pos == initial_pos:
                 print('hashtable is full. increase space')
                 return False
 
@@ -215,15 +206,15 @@ class HashTable(object):
         initial_pos = hashval
         cur_pos = hashval
         while (True):
-            if self.table[cur_pos]:  # something exists at this location
-                if self.table[cur_pos] == key:  # found key/value
+            if self.table[cur_pos]:
+                if self.table[cur_pos] == key:  # found key
                     return True
                 else:
-                    cur_pos += 1  # keep linear probing
+                    cur_pos += 1  # searching in linear probing
             else:
-                return False  # nothing found at this location. key absent
+                return False  # nothing found
 
-            if cur_pos == initial_pos:  # if one cycle done, then break
+            if cur_pos == initial_pos:  # no place
                 print('hashtable is full. increase space')
                 return False
 
@@ -231,21 +222,6 @@ class HashTable(object):
         for i in range(self.maxLength):
             if self.table[i]:
                 print(self.table[i], end=" ")
-
-    def mySet(self, key, value):
-        self.length += 1
-        self.key = self.key(key)
-
-    def get(self, key):
-        index = self.findNumber(key)
-        return self.table[index][1]
-
-    def delNumber__(self, key):
-        index = self.findNumber(key)
-        self.table[index] = None
-
-    def incr_key(self, key):
-        return (key + 1) % self.max_length
 
 
 class HashTableSet:

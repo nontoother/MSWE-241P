@@ -18,13 +18,12 @@ sort_time = [0]*5
 for repeat in range(5):
     L = []
     file = open('pride-and-prejudice.txt', 'r')
-    line = file.readline()
-    while line:
+    lines = file.readlines()
+    for line in lines:
         array = re.findall("[0-9a-zA-Z]+", line)
         length = len(array)
         for i in range(length):
             L.append(array[i])
-        line = file.readline()
 
     print(len(L))
     t1 = time.time_ns()
